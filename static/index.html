@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Number Plate Detection</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <div class="header__brand">
+        <span class="header__icon">🚗</span>
+        <span class="header__title">PlateDetect</span>
+      </div>
+      <span class="header__sub">AI-powered license plate reader</span>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- Upload -->
+    <section class="card upload-zone" id="uploadZone">
+      <div class="upload-zone__inner" id="dropArea">
+        <div class="upload-zone__icon">📷</div>
+        <p class="upload-zone__title">Drop a vehicle image here</p>
+        <p class="upload-zone__sub">JPG, PNG, WebP — up to 10MB</p>
+        <label class="btn btn--primary" for="fileInput">Choose Image</label>
+        <input type="file" id="fileInput" accept=".jpg,.jpeg,.png,.webp,.bmp" hidden />
+      </div>
+    </section>
+
+    <!-- Processing -->
+    <div class="processing" id="processing" hidden>
+      <div class="processing__spinner"></div>
+      <div>
+        <p class="processing__title">Analyzing image…</p>
+        <p class="processing__sub">Running plate detection + OCR</p>
+      </div>
+    </div>
+
+    <!-- Result -->
+    <section class="result" id="resultPanel" hidden>
+      <div class="result__top">
+        <!-- Plate number display -->
+        <div class="plate-display">
+          <p class="plate-display__label">Detected Plate</p>
+          <div class="plate-box" id="plateBox">
+            <span id="plateText">—</span>
+          </div>
+          <p class="plate-display__conf">Confidence: <strong id="confVal">—</strong></p>
+        </div>
+
+        <!-- Candidates -->
+        <div class="candidates" id="candidatesWrap">
+          <p class="candidates__label">All candidates</p>
+          <ul id="candidatesList" class="candidates__list"></ul>
+        </div>
+      </div>
+
+      <!-- Images -->
+      <div class="result__images">
+        <div class="img-panel">
+          <p class="img-panel__label">Annotated Image</p>
+          <img id="annotatedImg" class="result-img" alt="Annotated" />
+        </div>
+        <div class="img-panel" id="cropPanel" hidden>
+          <p class="img-panel__label">Plate Region</p>
+          <img id="cropImg" class="result-img result-img--crop" alt="Plate crop" />
+        </div>
+      </div>
+
+      <div class="result__actions">
+        <button class="btn btn--primary" id="newDetection">Detect Another</button>
+      </div>
+    </section>
+
+    <!-- History -->
+    <section class="card history">
+      <div class="history__header">
+        <h3 class="panel__title">Recent Detections</h3>
+        <button class="btn btn--ghost btn--xs" id="clearHistory">Clear</button>
+      </div>
+      <div id="historyList" class="history__list">
+        <p class="empty">No detections yet.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
